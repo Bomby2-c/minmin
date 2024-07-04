@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgto7lmjv4g16"]
+
+[ext_resource type="PackedScene" uid="uid://b6ce2thwughau" path="res://Models Exported/minmin.glb" id="1_rqnp6"]
+
+[node name="minmin" instance=ExtResource("1_rqnp6")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(0, 0.00674394, -0.0526023)
+bones/0/rotation = Quaternion(0.130649, 0, 0, 0.991429)
+bones/1/rotation = Quaternion(-0.00213898, 0.0257495, -0.00377484, 0.999659)
+bones/2/rotation = Quaternion(-7.28693e-09, 3.38821e-05, 0.137242, 0.990538)
+bones/3/rotation = Quaternion(-9.98353e-09, 4.96796e-05, 0.201213, 0.979547)
+bones/4/rotation = Quaternion(-2.88015e-09, 5.99426e-05, 0.242794, 0.970078)
+bones/5/rotation = Quaternion(-2.62267e-08, 5.67758e-05, 0.229488, 0.973312)
+bones/6/rotation = Quaternion(-6.9853e-08, 7.45755e-05, 0.302083, 0.953282)
+bones/7/position = Vector3(3.55271e-15, 0.0487514, 0.994009)
+bones/7/rotation = Quaternion(0.793429, 4.59528e-08, 5.99022e-08, 0.608663)
+bones/9/position = Vector3(0, 0.553098, -0.941407)
+bones/9/rotation = Quaternion(-0.608663, 0, 0, 0.793428)
+
+[node name="AnimationPlayer" parent="." index="1"]
+playback_default_blend_time = 1.0

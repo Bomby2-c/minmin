@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://b56ybumn4bdsk"]
+
+[ext_resource type="PackedScene" uid="uid://cukeh6xowoj3b" path="res://Models Exported/burby.glb" id="1_bpoqj"]
+
+[node name="burby" instance=ExtResource("1_bpoqj")]
+
+[node name="Skeleton3D" parent="burby2" index="0"]
+bones/0/position = Vector3(1.65471, -0.871255, -2.45516e-10)
+bones/0/rotation = Quaternion(-3.2653e-09, 2.41538e-08, 0.591329, 0.80643)
+bones/1/rotation = Quaternion(-0.00144734, -0.000497962, 0.228709, 0.973494)
+bones/2/position = Vector3(1.65471, -0.865783, -1.53005e-10)
+bones/2/rotation = Quaternion(0.583026, -0.400101, -0.583026, -0.400101)
+bones/3/rotation = Quaternion(0.139279, -4.55208e-08, -4.55338e-08, 0.990253)
+bones/4/position = Vector3(0.766155, -1.57203, -0.492473)
+bones/4/rotation = Quaternion(-0.524038, -0.474746, 0.524038, -0.474746)
+bones/5/rotation = Quaternion(-0.211015, 2.65888e-08, 1.05732e-07, 0.977483)
+bones/6/position = Vector3(0.767167, -1.57226, 0.485907)
+bones/6/rotation = Quaternion(0.523355, 0.4755, -0.523354, 0.4755)
+bones/7/rotation = Quaternion(-0.213923, 7.88196e-08, -5.312e-08, 0.976851)
+
+[node name="AnimationPlayer" parent="." index="1"]
+playback_default_blend_time = 1.0

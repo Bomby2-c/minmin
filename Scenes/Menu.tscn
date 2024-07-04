@@ -1,0 +1,123 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgrqynblxnujo"]
+
+[ext_resource type="Texture2D" uid="uid://dr562ew5fbhh3" path="res://Images/introbg.png" id="1_qcvcr"]
+[ext_resource type="Script" path="res://Scripts/Menu.gd" id="2_u8h02"]
+[ext_resource type="Texture2D" uid="uid://n5tlxm6gkbj2" path="res://Images/button.png" id="3_70hhu"]
+[ext_resource type="Texture2D" uid="uid://ckr6unqegl0xk" path="res://Images/minminlogo.png" id="4_ikpvb"]
+[ext_resource type="AudioStream" uid="uid://cv34y1qx2ts4d" path="res://Audio/MinMin Main Theme.ogg" id="5_oj7mm"]
+[ext_resource type="Texture2D" uid="uid://bbquk4d6rijxt" path="res://Images/gradient.png" id="5_xpm5k"]
+[ext_resource type="PackedScene" uid="uid://bf3iepvc7fdyk" path="res://Models Exported/platform.glb" id="6_1qbiy"]
+[ext_resource type="PackedScene" uid="uid://dgto7lmjv4g16" path="res://Scenes/Objects/minminModel.tscn" id="7_8rorc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ciddu"]
+albedo_texture = ExtResource("1_qcvcr")
+
+[sub_resource type="QuadMesh" id="QuadMesh_whpg2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_g55u1"]
+font_size = 251
+outline_size = 60
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, 0.353553, 0.353553, -0.5, 0.612372, 0.612372, 0, -0.707107, 0.707107, 0, 3, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(99.6024, 0, 0, 0, 99.6024, 1.90735e-06, 0, -1.90735e-06, 99.6024, 0, 8.9884, -33.5452)
+material_override = SubResource("StandardMaterial3D_ciddu")
+mesh = SubResource("QuadMesh_whpg2")
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("logo", "platform", "minmin")]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(20, 20)
+script = ExtResource("2_u8h02")
+logo = NodePath("Sprite2D")
+platform = NodePath("../platform")
+minmin = [NodePath("../platform/minmin"), NodePath("../platform/minmin2"), NodePath("../platform/minmin3"), NodePath("../platform/minmin4")]
+
+[node name="containerhehe" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = -452.0
+offset_top = -384.0
+offset_right = 489.0
+offset_bottom = 430.0
+scale = Vector2(0.28, 0.28)
+pivot_offset = Vector2(471.095, 260.028)
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Control/containerhehe"]
+layout_mode = 2
+texture_normal = ExtResource("3_70hhu")
+
+[node name="Label" type="Label" parent="Control/containerhehe/TextureButton"]
+layout_mode = 0
+offset_left = 211.732
+offset_top = 10.8668
+offset_right = 716.732
+offset_bottom = 356.867
+pivot_offset = Vector2(252.051, 171.413)
+text = "Play"
+label_settings = SubResource("LabelSettings_g55u1")
+
+[node name="TextureButton2" type="TextureButton" parent="Control/containerhehe"]
+layout_mode = 2
+texture_normal = ExtResource("3_70hhu")
+
+[node name="Label" type="Label" parent="Control/containerhehe/TextureButton2"]
+layout_mode = 0
+offset_left = 211.732
+offset_top = 10.8668
+offset_right = 737.732
+offset_bottom = 356.867
+pivot_offset = Vector2(252.051, 171.413)
+text = "Quit"
+label_settings = SubResource("LabelSettings_g55u1")
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(0, -504)
+scale = Vector2(0.532101, 0.532101)
+texture = ExtResource("4_ikpvb")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Control"]
+position = Vector2(20, -280)
+scale = Vector2(0.72, 0.759999)
+texture = ExtResource("5_xpm5k")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oj7mm")
+autoplay = true
+
+[node name="platform" parent="." instance=ExtResource("6_1qbiy")]
+transform = Transform3D(2.15322, 0, 0, 0, 2.15322, 0, 0, 0, 2.15322, 0, 0.5, -6.106)
+
+[node name="minmin" parent="platform" instance=ExtResource("7_8rorc")]
+transform = Transform3D(-3.37766e-09, 0, -0.0772718, 0, 0.0772718, 0, 0.0772718, 0, -3.37766e-09, -0.00316193, 0.599523, 1.37883)
+
+[node name="minmin2" parent="platform" instance=ExtResource("7_8rorc")]
+transform = Transform3D(-0.0657458, 0, -0.0406007, 0, 0.0772718, 0, 0.0406007, 0, -0.0657458, -1.06176, 0.623362, 0.196763)
+
+[node name="minmin3" parent="platform" instance=ExtResource("7_8rorc")]
+transform = Transform3D(-0.0122638, 0, 0.0762924, 0, 0.0772718, 0, -0.0762924, 0, -0.0122638, 0.0326716, 0.640196, -1.13409)
+
+[node name="minmin4" parent="platform" instance=ExtResource("7_8rorc")]
+transform = Transform3D(0.072203, 0, -0.0275255, 0, 0.0772718, 0, 0.0275255, 0, 0.072203, 0.961513, 0.63299, 0.102347)
+
+[connection signal="button_up" from="Control/containerhehe/TextureButton" to="Control" method="OnPlayPressed"]
+[connection signal="button_up" from="Control/containerhehe/TextureButton2" to="Control" method="OnQuitPressed"]

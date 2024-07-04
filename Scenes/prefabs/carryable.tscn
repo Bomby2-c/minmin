@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbrxvugp8rns6"]
+
+[ext_resource type="Script" path="res://Scripts/Carryable.gd" id="1_fp80x"]
+
+[node name="carryable" type="CharacterBody3D" node_paths=PackedStringArray("CarryPositions") groups=["Carry"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.641474, -10)
+collision_layer = 33
+script = ExtResource("1_fp80x")
+CarryPositions = [null]
+speed = 25
+minmintospawn = 1
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 10.0
+path_height_offset = 1.0
+navigation_layers = 17
+avoidance_enabled = true
+radius = 5.0
+avoidance_layers = 17
+avoidance_mask = 17
+debug_path_custom_color = Color(1, 0, 0, 1)

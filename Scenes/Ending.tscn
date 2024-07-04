@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://dqrca5rnpi64j"]
+
+[ext_resource type="Texture2D" uid="uid://dx42e7ubjyiht" path="res://Images/youwin.png" id="1_id2l6"]
+[ext_resource type="Script" path="res://Scripts/end.gd" id="2_6b48l"]
+[ext_resource type="AudioStream" uid="uid://7c0opord6wjm" path="res://Audio/minmincredits.ogg" id="3_8iael"]
+[ext_resource type="Texture2D" uid="uid://n5tlxm6gkbj2" path="res://Images/button.png" id="8_dpyfk"]
+[ext_resource type="Texture2D" uid="uid://bej2hkaklm8gn" path="res://Images/square.png" id="9_uick7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5un06"]
+font_size = 336
+outline_size = 120
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_auvuw"]
+font_size = 1000
+outline_size = 330
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 40)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("1_id2l6")
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("note")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_6b48l")
+note = NodePath("../Sprite2D")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -804.0
+offset_top = -488.0
+offset_right = 766.0
+offset_bottom = -26.0
+grow_horizontal = 2
+scale = Vector2(0.27594, 0.27594)
+pivot_offset = Vector2(783.95, 230.952)
+text = "You win :)"
+label_settings = SubResource("LabelSettings_5un06")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="got it" type="TextureButton" parent="Control"]
+layout_mode = 0
+offset_left = 373.0
+offset_top = -304.0
+offset_right = 1314.0
+offset_bottom = 93.0
+scale = Vector2(0.199453, 0.199453)
+texture_normal = ExtResource("8_dpyfk")
+
+[node name="Label" type="Label" parent="Control/got it"]
+layout_mode = 0
+offset_left = 90.2471
+offset_right = 2752.25
+offset_bottom = 1365.0
+scale = Vector2(0.277259, 0.270939)
+text = "Got it"
+label_settings = SubResource("LabelSettings_auvuw")
+
+[node name="Square" type="Sprite2D" parent="."]
+modulate = Color(0.992157, 0.72549, 0, 1)
+z_index = -385
+position = Vector2(-17, -27)
+scale = Vector2(1.64, 1)
+texture = ExtResource("9_uick7")
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8iael")
+autoplay = true
+
+[connection signal="button_up" from="Control/got it" to="Control" method="_on_got_it_button_up"]

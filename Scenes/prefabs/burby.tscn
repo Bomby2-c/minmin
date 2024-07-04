@@ -1,0 +1,106 @@
+[gd_scene load_steps=9 format=3 uid="uid://1w0qufn3dam8"]
+
+[ext_resource type="Script" path="res://Scenes/Burby.gd" id="1_6i8wq"]
+[ext_resource type="PackedScene" uid="uid://b56ybumn4bdsk" path="res://Scenes/Objects/burbyModel.tscn" id="2_qdvg1"]
+[ext_resource type="Script" path="res://Scenes/Health.gd" id="4_su4hp"]
+[ext_resource type="PackedScene" uid="uid://bfhsnfr3c8145" path="res://Scenes/prefabs/healthbar_3d.tscn" id="5_njnyo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_agl77"]
+size = Vector3(1.706, 2.615, 1.706)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6smmk"]
+radius = 0.776407
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ovxhd"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mg2vk"]
+radius = 0.751632
+
+[node name="Burby" type="CharacterBody3D" node_paths=PackedStringArray("visual_ray", "BiteArea", "Health")]
+transform = Transform3D(2.1, 0, 0, 0, 2.1, 0, 0, 0, 2.1, 0, 0, 0)
+script = ExtResource("1_6i8wq")
+visual_ray = NodePath("visibility")
+raySpeed = 25.0
+rayRange = 1.0
+speed = 1000.0
+AngularSpeed = 1.0
+Distancetoloose = 25.0
+DistanceToBite = 5.0
+BiteArea = NodePath("bitearea")
+Health = NodePath("Health")
+
+[node name="visibility" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.96046e-08, -1, 0.000343323)
+target_position = Vector3(0, 0, -7.5)
+collision_mask = 2
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 5
+
+[node name="burbymodel" parent="." instance=ExtResource("2_qdvg1")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37113e-08, 0, 1, 0, 1, 0, -1, 0, -4.37113e-08, 0, 0, 0.952344)
+shape = SubResource("BoxShape3D_agl77")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 10.0
+path_height_offset = 1.0
+navigation_layers = 17
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BiteColliderTimer" type="Timer" parent="."]
+wait_time = 0.65
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="attacktimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="bitearea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.44544, -0.816228)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="bitearea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.248304)
+shape = SubResource("SphereShape3D_6smmk")
+
+[node name="Health" type="Sprite3D" parent="." node_paths=PackedStringArray("Healthbar")]
+transform = Transform3D(0.103085, 0, 0, 0, 0.103085, 0, 0, 0, 0.103085, -0.0253332, 1.62577, 0.583776)
+billboard = 1
+texture = SubResource("ViewportTexture_ovxhd")
+script = ExtResource("4_su4hp")
+Health = 50.0
+Healthbar = NodePath("../SubViewport/Healthbar3D")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1000, 1000)
+render_target_update_mode = 4
+
+[node name="Healthbar3D" parent="SubViewport" instance=ExtResource("5_njnyo")]
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+value = 75.0
+
+[node name="Attackarea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Attackarea"]
+transform = Transform3D(1.91918, 0, 0, 0, 1.91918, 0, 0, 0, 1.91918, 0, -0.66437, 0.187638)
+shape = SubResource("SphereShape3D_mg2vk")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="BiteColliderTimer" to="." method="_on_bite_collider_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="remove"]
+[connection signal="timeout" from="attacktimer" to="." method="_on_attacktimer_timeout"]
+[connection signal="body_entered" from="Attackarea" to="." method="_on_attackarea_body_entered"]

@@ -1,0 +1,108 @@
+[gd_scene load_steps=15 format=3 uid="uid://prvq00m3j0bl"]
+
+[ext_resource type="Material" uid="uid://gjhntrndof5l" path="res://Materials/FloorTexture.tres" id="1_nyuxw"]
+[ext_resource type="Script" path="res://Scripts/MoveCamera.gd" id="2_8fqi3"]
+[ext_resource type="Script" path="res://Scripts/Movement.gd" id="3_1cf1q"]
+[ext_resource type="PackedScene" uid="uid://cdg3362lru5hs" path="res://Scenes/Objects/PlayerModel.tscn" id="4_2si5m"]
+[ext_resource type="Script" path="res://Scripts/Whistle.gd" id="5_jdsqk"]
+[ext_resource type="Material" uid="uid://c78s3xvi3eqll" path="res://Materials/Whistle.tres" id="6_oar7a"]
+[ext_resource type="AudioStream" uid="uid://dg5v2tjqid3ac" path="res://Audio/whistle.ogg" id="7_ue4km"]
+[ext_resource type="PackedScene" uid="uid://wa1v4ch1js8w" path="res://Scenes/min_min.tscn" id="8_e144n"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_yespw"]
+vertices = PackedVector3Array(-12, 0.75, -12, -12, 0.75, 12, 12, 0.75, 12, 12, 0.75, -12)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ois8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3gwqa"]
+size = Vector3(25, 0.5, 25)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ji8bv"]
+margin = 0.0
+radius = 0.595
+height = 2.44588
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d2nfp"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gr38q"]
+height = 5.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_yespw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+collision_layer = 17
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(25, 0, 0, 0, 0.5, 0, 0, 0, 25, 0, 0, 0)
+material_override = ExtResource("1_nyuxw")
+mesh = SubResource("BoxMesh_6ois8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_3gwqa")
+
+[node name="CameraNode3D" type="Node3D" parent="." node_paths=PackedStringArray("Player")]
+transform = Transform3D(0.729852, 0, -0.683605, 0, 1, 0, 0.683605, 0, 0.729852, 0, 0, 0)
+script = ExtResource("2_8fqi3")
+Player = NodePath("../Player")
+
+[node name="MainCamera" type="Camera3D" parent="CameraNode3D"]
+transform = Transform3D(-1, 5.96046e-08, -5.96046e-08, 0, 0.707107, 0.707107, 8.9407e-08, 0.707107, -0.707107, 0, 10, -12.301)
+current = true
+
+[node name="Node" type="Node" parent="CameraNode3D"]
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("Camera") groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3623, 1.28507, 3.2644)
+script = ExtResource("3_1cf1q")
+SPEED = 400.0
+RotateSpeed = 10
+Camera = NodePath("../CameraNode3D/MainCamera")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245337, 0)
+shape = SubResource("CapsuleShape3D_ji8bv")
+
+[node name="PlayerModel" parent="Player" instance=ExtResource("4_2si5m")]
+transform = Transform3D(-1.94079e-08, 0, -0.444, 0, 0.444, 0, 0.444, 0, -1.94079e-08, 0, -0.152238, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 6.147, 0)
+visible = false
+light_indirect_energy = 1.915
+spot_range = 10.753
+spot_attenuation = 0.0980731
+spot_angle = 23.23
+
+[node name="whistle" type="Area3D" parent="." node_paths=PackedStringArray("Cam", "Player", "whissfx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.18447, 0.646984, 0)
+collision_mask = 34
+script = ExtResource("5_jdsqk")
+Cam = NodePath("../CameraNode3D/MainCamera")
+Player = NodePath("../Player")
+whissfx = NodePath("AudioStreamPlayer")
+
+[node name="Whistle" type="MeshInstance3D" parent="whistle"]
+layers = 16
+material_override = ExtResource("6_oar7a")
+mesh = SubResource("CylinderMesh_d2nfp")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="whistle"]
+shape = SubResource("CylinderShape3D_gr38q")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="whistle"]
+stream = ExtResource("7_ue4km")
+volume_db = -10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.748924, 0.635652, 0.187238, 0.404852, -0.662604, 0.630119, 0.524602, -0.396108, -0.753586, 0, 2.5608, 0)
+shadow_enabled = true
+
+[node name="MinMin" parent="." instance=ExtResource("8_e144n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 8)
+
+[connection signal="body_entered" from="whistle" to="whistle" method="_on_body_entered"]

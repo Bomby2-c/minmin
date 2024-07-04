@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwkwdmyi60rao"]
+
+[ext_resource type="AudioStream" uid="uid://n5soqys0vqmq" path="res://Audio/pluck.ogg" id="1_4agqu"]
+[ext_resource type="Script" path="res://Scripts/DeleteAfterPlay.gd" id="2_vnx0b"]
+
+[node name="AudioPluck" type="AudioStreamPlayer"]
+stream = ExtResource("1_4agqu")
+volume_db = -10.0
+script = ExtResource("2_vnx0b")

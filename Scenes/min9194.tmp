@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://wa1v4ch1js8w"]
+
+[ext_resource type="Script" path="res://Scripts/PikminNavmesh.gd" id="1_wvgyo"]
+[ext_resource type="Script" path="res://Scripts/PikminStateHandler.gd" id="2_nsviq"]
+[ext_resource type="PackedScene" uid="uid://dgto7lmjv4g16" path="res://Scenes/Objects/minminModel.tscn" id="3_hko7p"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_dnovy"]
+height = 1.41845
+radius = 0.25
+
+[node name="MinMin" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.608148, 1.4953, 4.40961)
+collision_layer = 2
+collision_mask = 18
+script = ExtResource("1_wvgyo")
+AngularSpeed = 10.0
+PlayerDistance = 2.5
+Enabled = null
+
+[node name="StateHandler" type="Node3D" parent="." node_paths=PackedStringArray("NavMeshCode")]
+script = ExtResource("2_nsviq")
+NavMeshCode = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_dnovy")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+path_desired_distance = 10.0
+path_height_offset = 1.0
+navigation_layers = 17
+avoidance_layers = 17
+avoidance_mask = 17
+debug_path_custom_color = Color(1, 0, 0, 1)
+
+[node name="minmin" parent="." instance=ExtResource("3_hko7p")]
+transform = Transform3D(-6.55671e-09, 0, 0.15, 0, 0.15, 0, -0.15, 0, -6.55671e-09, 0, -0.578, 0)

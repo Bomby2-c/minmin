@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw0fakigrvjjo"]
+
+[ext_resource type="AudioStream" uid="uid://cv2yeonn04mpg" path="res://Audio/death.ogg" id="1_km3nw"]
+[ext_resource type="Script" path="res://Scenes/Death.gd" id="1_xgab4"]
+[ext_resource type="PackedScene" uid="uid://daek0mhxaiyef" path="res://Scenes/prefabs/ugly.tscn" id="4_f8wfb"]
+[ext_resource type="PackedScene" uid="uid://bgl3a7lsyhbkq" path="res://Models Exported/map.tscn" id="6_dup1w"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_xgab4")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_km3nw")
+volume_db = -5.0
+autoplay = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, -0.0930667, -0.766764, -0.635147, 0.700956, 0.402584, -0.588717, 0, 2.5608, 0)
+shadow_enabled = true
+
+[node name="map" parent="." instance=ExtResource("6_dup1w")]
+transform = Transform3D(1.88989, 0, 0, 0, 1.88989, 0, 0, 0, 1.88989, -0.000291295, 0.100213, 4.14997e-05)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.727797, 0.685793, 0, -0.685793, 0.727797, -7, 10, 41)
+
+[node name="ugly" parent="." instance=ExtResource("4_f8wfb")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -7, 2, 34)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

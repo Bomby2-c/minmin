@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c72li62mw51ou"]
+
+[ext_resource type="Texture2D" uid="uid://28d35ydhtvbi" path="res://Images/dead.png" id="1_p38b3"]
+[ext_resource type="Script" path="res://Scenes/Ghost.gd" id="2_uic68"]
+[ext_resource type="AudioStream" uid="uid://cn1sen221e5um" path="res://Audio/pikmin_die_1.mp3" id="3_sreyk"]
+
+[node name="MinMinGhost" type="Sprite3D"]
+transform = Transform3D(0.084, 0, 0, 0, 0.084, 0, 0, 0, 0.084, -2, 2, 0)
+modulate = Color(0.917647, 0, 0.117647, 0.866667)
+billboard = 1
+texture = ExtResource("1_p38b3")
+script = ExtResource("2_uic68")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sreyk")
+volume_db = -15.928
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="Delete"]

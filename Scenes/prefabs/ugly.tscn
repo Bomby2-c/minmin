@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://daek0mhxaiyef"]
+
+[ext_resource type="PackedScene" uid="uid://bnwsm1tf42u8s" path="res://Models Exported/ugly ass mf.glb" id="1_06v5c"]
+
+[node name="ugly ass mf" instance=ExtResource("1_06v5c")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-0.349021, 0.148583, 0)
+bones/1/rotation = Quaternion(0, -9.29674e-11, 0.000691935, 1)
+bones/2/rotation = Quaternion(4.44086e-16, 7.33634e-12, -5.46426e-05, 1)
+bones/3/position = Vector3(0, 1.51379, 1)
+bones/3/rotation = Quaternion(0.896564, -0.0168658, -0.0133002, 0.442392)
+bones/4/rotation = Quaternion(0.468907, -0.142472, -0.212815, 0.845303)
+bones/5/position = Vector3(0, 1.52906, -1.00319)
+bones/5/rotation = Quaternion(-0.882024, 0.00669202, -0.050867, 0.468403)
+bones/6/rotation = Quaternion(-0.134623, -0.00569158, 0.00402423, 0.990872)
+bones/7/position = Vector3(-0.0590968, 0.125426, -0.491685)
+bones/7/rotation = Quaternion(0.999797, -0.0198883, 6.30645e-05, -0.00316188)
+bones/8/rotation = Quaternion(-0.0031613, -8.53751e-05, -0.0270179, 0.99963)
+bones/9/position = Vector3(-0.0524587, 0.121418, 0.476057)
+bones/9/rotation = Quaternion(0.999938, -0.0105809, -3.63873e-05, 0.00345723)
+bones/10/rotation = Quaternion(0.00345721, 3.89872e-05, -0.0112665, 0.999931)
+
+[node name="AnimationPlayer" parent="." index="1"]
+speed_scale = 0.6

@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://6pmx5k3r8367"]
+
+[ext_resource type="PackedScene" uid="uid://b8b5oqtcntaa7" path="res://blend models/fucked up rock.blend" id="1_a0kb4"]
+[ext_resource type="Script" path="res://Scenes/intro.gd" id="1_ever2"]
+[ext_resource type="PackedScene" uid="uid://duaob4swdn8l" path="res://blend models/ship.blend" id="2_ykd0p"]
+[ext_resource type="Texture2D" uid="uid://bencf6agkpxtp" path="res://Images/earth_daymap.jpg" id="3_gbx3u"]
+[ext_resource type="Texture2D" uid="uid://cmc38atcjf7qi" path="res://Images/Right_Tex.png" id="5_y4o5k"]
+[ext_resource type="AudioStream" uid="uid://bv4ftwxjw47ai" path="res://Audio/crash.wav" id="6_l83vt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_acx0k"]
+albedo_texture = ExtResource("3_gbx3u")
+
+[sub_resource type="SphereMesh" id="SphereMesh_auebw"]
+
+[sub_resource type="Animation" id="Animation_012fc"]
+resource_name = "Intro"
+length = 5.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ship")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -32.7357, 0, 0, 1, 1, -15.7357, 0, 0, 5, 1, -15.7357, -218.662, -441.629)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ship")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, -0.815168, 0.579224, 1, 1, 0.426738, 0.600568, 0.551197, -0.391657, 1.6, 1, 0.857616, 0.110048, -0.198641, -0.461439)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("fucked up rock")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 17.0456, 0, 0.483098, 1, 1, -13.3304, 0, 0.483098, 1.6, 1, -13.3304, 6, 10.4831)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("fucked up rock")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oar75"]
+_data = {
+"Intro": SubResource("Animation_012fc")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhne7"]
+albedo_texture = ExtResource("5_y4o5k")
+
+[sub_resource type="QuadMesh" id="QuadMesh_iuqed"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ever2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.596753, -0.755445, 0.270535, -0.137853, 0.235617, 0.962019, -0.790495, -0.611382, 0.0364644, 0, 0, 0)
+
+[node name="fucked up rock" parent="." instance=ExtResource("1_a0kb4")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 17.0456, 0, 0.483098)
+
+[node name="ship" parent="." instance=ExtResource("2_ykd0p")]
+transform = Transform3D(-0.328999, 0.94433, 0, -0.94433, -0.328999, 0, 0, 0, 1, -32.7357, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(300, 0, 0, 0, 300, 0, 0, 0, 300, 61.0831, -182.921, -273.725)
+material_override = SubResource("StandardMaterial3D_acx0k")
+mesh = SubResource("SphereMesh_auebw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_oar75")
+}
+autoplay = "Intro"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.965926, 0.143785, -0.215205, -7.71341e-09, 0.831489, 0.555541, 0.258819, -0.536612, 0.803157, -18.2678, 8.50672, 7.63048)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1307.14, 247.662, -247.662, 0, 956.892, 956.892, 350.247, -924.286, 924.286, 0, 0, -471.592)
+material_override = SubResource("StandardMaterial3D_fhne7")
+mesh = SubResource("QuadMesh_iuqed")
+
+[node name="crash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_l83vt")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

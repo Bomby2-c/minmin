@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://hemfmhnnp5td"]
+
+[ext_resource type="PackedScene" uid="uid://bgym0kokgg414" path="res://blend models/Cone.blend" id="1_ynl88"]
+[ext_resource type="Material" uid="uid://cgqdm00q78f6j" path="res://Cone.tres" id="2_vp0sg"]
+
+[node name="Cone" instance=ExtResource("1_ynl88")]
+
+[node name="Cylinder" parent="." index="0"]
+material_override = ExtResource("2_vp0sg")

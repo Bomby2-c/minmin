@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl5fup5s2rjrt"]
+
+[ext_resource type="PackedScene" uid="uid://cep6l60jg2gcu" path="res://Models Exported/onion.glb" id="1_jebwy"]
+[ext_resource type="Script" path="res://Scenes/Objects/Onion.gd" id="2_vvoet"]
+
+[node name="onion" instance=ExtResource("1_jebwy")]
+script = ExtResource("2_vvoet")

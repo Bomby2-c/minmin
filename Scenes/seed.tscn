@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpajuuyy5nsoa"]
+
+[ext_resource type="Script" path="res://Models Exported/Seed.gd" id="1_m16ys"]
+[ext_resource type="PackedScene" uid="uid://b7wu87k7wtrgi" path="res://Models Exported/Seed.glb" id="2_muw3a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f0iuo"]
+size = Vector3(2, 8.5, 2)
+
+[node name="Seed" type="Node3D"]
+transform = Transform3D(0.233, 0, 0, 0, 0.233, 0, 0, 0, 0.233, -11.9345, 0.149787, 0.160637)
+script = ExtResource("1_m16ys")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_f0iuo")
+
+[node name="Seedmodel" parent="." instance=ExtResource("2_muw3a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

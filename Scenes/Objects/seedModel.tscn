@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgjtrfrbf310y"]
+
+[ext_resource type="PackedScene" uid="uid://b7wu87k7wtrgi" path="res://Models Exported/Seed.glb" id="1_kqoas"]
+
+[node name="Seed" instance=ExtResource("1_kqoas")]

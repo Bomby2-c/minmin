@@ -1,0 +1,437 @@
+[gd_scene load_steps=19 format=3 uid="uid://ddh4woib4obgf"]
+
+[ext_resource type="Script" path="res://Scripts/Movement.gd" id="1_1mjs5"]
+[ext_resource type="Script" path="res://Scripts/MoveCamera.gd" id="1_gddu2"]
+[ext_resource type="Material" uid="uid://gjhntrndof5l" path="res://FloorTexture.tres" id="2_tisg6"]
+[ext_resource type="PackedScene" uid="uid://cdg3362lru5hs" path="res://Scenes/Objects/PlayerModel.tscn" id="2_v6cvg"]
+[ext_resource type="PackedScene" uid="uid://wa1v4ch1js8w" path="res://Scenes/min_min.tscn" id="4_gmt0d"]
+[ext_resource type="Material" uid="uid://c78s3xvi3eqll" path="res://Whistle.tres" id="5_e05ww"]
+[ext_resource type="Script" path="res://Scripts/Whistle.gd" id="6_c7lm2"]
+[ext_resource type="PackedScene" uid="uid://dl5fup5s2rjrt" path="res://Scenes/Objects/onionModel.tscn" id="7_37cjr"]
+[ext_resource type="PackedScene" uid="uid://hemfmhnnp5td" path="res://Scenes/Objects/cone.tscn" id="9_fl856"]
+[ext_resource type="Texture2D" uid="uid://28d35ydhtvbi" path="res://dead.png" id="10_un88e"]
+[ext_resource type="AudioStream" uid="uid://cn1sen221e5um" path="res://pikmin_die_1.mp3" id="11_0ke3a"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_mo8qt"]
+vertices = PackedVector3Array(-42.5, 0.745108, -49.5, -49.5, 0.745108, -49.5, -49.5, 0.745108, -38.5, -35.25, 0.745108, -49.5, -42.5, 0.745108, -49.5, -49.5, 0.745108, -38.5, -28, 0.745108, -49.5, -35.25, 0.745108, -49.5, -49.5, 0.745108, -38.5, -20.75, 0.745108, -49.5, -28, 0.745108, -49.5, -49.5, 0.745108, -38.5, -20.75, 0.745108, -49.5, -49.5, 0.745108, -38.5, -49.5, 0.745108, -27.25, -13.5, 0.745108, -49.5, 7, 0.995108, -4.75, 7, 0.745108, -5.25, 1, 0.745108, -49.5, -6.25, 0.745108, -49.5, -49.5, 0.745108, -16, -49.5, 0.745108, -4.75, 7, 0.745108, -5.25, 8.5, 0.745108, -5.25, 8.25, 0.745108, -49.5, 1, 0.745108, -49.5, -6.25, 0.745108, -49.5, -13.5, 0.745108, -49.5, -49.5, 0.745108, -27.25, -49.5, 0.745108, -16, 8.5, 0.745108, -5.25, 10.25, 0.745108, -5.25, 10.5, 0.745108, -49.5, 8.25, 0.745108, -49.5, 49.5, 0.745108, -38, 49.5, 0.745108, -49.5, 39.75, 0.745108, -49.5, 49.5, 0.745108, -38, 39.75, 0.745108, -49.5, 30, 0.745108, -49.5, 49.5, 0.745108, -26.25, 49.5, 0.745108, -38, 30, 0.745108, -49.5, 20.25, 0.745108, -49.5, 10.25, 0.745108, -5.25, 12, 0.745108, -5, 49.5, 0.745108, -14.75, 49.5, 0.745108, -26.25, 20.25, 0.745108, -49.5, 10.5, 0.745108, -49.5, 12, 0.745108, -5, 12, 0.745108, -3, 49.5, 0.745108, -3, 49.5, 0.745108, -14.75, 7, 0.995108, 4.25, 13.25, 3.49511, 4.25, 13.25, 3.49511, -4.25, 7, 0.995108, -4.25, -49.5, 0.745108, 4.75, 7, 0.995108, 4.25, 7, 0.995108, -4.25, -49.5, 0.745108, -4.75, -49.5, 0.745108, 4.75, 7, 0.995108, 4.75, 7, 0.995108, 4.25, 7, 0.995108, -4.25, 7, 0.995108, -4.75, -49.5, 0.745108, -4.75, 12, 0.745108, 3, 49.5, 0.745108, 3, 49.5, 0.745108, -3, 12, 0.745108, -3, 39.75, 0.745108, 49.5, 49.5, 0.745108, 49.5, 49.5, 0.745108, 37.75, 30, 0.745108, 49.5, 39.75, 0.745108, 49.5, 49.5, 0.745108, 37.75, 30, 0.745108, 49.5, 49.5, 0.745108, 37.75, 49.5, 0.745108, 26.25, 20.25, 0.745108, 49.5, 49.5, 0.745108, 14.5, 12, 0.745108, 5, 10.25, 0.745108, 5.25, 10.5, 0.745108, 49.5, 20.25, 0.745108, 49.5, 49.5, 0.745108, 26.25, 49.5, 0.745108, 3, 12, 0.745108, 3, 12, 0.745108, 5, 49.5, 0.745108, 14.5, -49.5, 0.745108, 38.25, -49.5, 0.745108, 49.5, -42.5, 0.745108, 49.5, -49.5, 0.745108, 38.25, -42.5, 0.745108, 49.5, -35.25, 0.745108, 49.5, -49.5, 0.745108, 38.25, -35.25, 0.745108, 49.5, -28, 0.745108, 49.5, -49.5, 0.745108, 38.25, -28, 0.745108, 49.5, -20.75, 0.745108, 49.5, -49.5, 0.745108, 27, -49.5, 0.745108, 38.25, -20.75, 0.745108, 49.5, -13.5, 0.745108, 49.5, 1, 0.745108, 49.5, 7, 0.745108, 5.25, 7, 0.995108, 4.75, -49.5, 0.745108, 4.75, -49.5, 0.745108, 15.75, -6.25, 0.745108, 49.5, 8.25, 0.745108, 49.5, 8.5, 0.745108, 5.25, 7, 0.745108, 5.25, 1, 0.745108, 49.5, -49.5, 0.745108, 27, -13.5, 0.745108, 49.5, -6.25, 0.745108, 49.5, -49.5, 0.745108, 15.75, 8.25, 0.745108, 49.5, 10.5, 0.745108, 49.5, 10.25, 0.745108, 5.25, 8.5, 0.745108, 5.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(5, 4, 3), PackedInt32Array(8, 7, 6), PackedInt32Array(9, 11, 10), PackedInt32Array(12, 15, 13), PackedInt32Array(13, 15, 14), PackedInt32Array(17, 16, 18), PackedInt32Array(18, 16, 19), PackedInt32Array(19, 16, 20), PackedInt32Array(20, 16, 21), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(27, 26, 28), PackedInt32Array(28, 26, 29), PackedInt32Array(30, 33, 31), PackedInt32Array(31, 33, 32), PackedInt32Array(36, 35, 34), PackedInt32Array(39, 38, 37), PackedInt32Array(42, 41, 43), PackedInt32Array(43, 41, 40), PackedInt32Array(45, 44, 46), PackedInt32Array(46, 44, 47), PackedInt32Array(47, 44, 48), PackedInt32Array(48, 44, 49), PackedInt32Array(51, 50, 52), PackedInt32Array(52, 50, 53), PackedInt32Array(57, 56, 54), PackedInt32Array(54, 56, 55), PackedInt32Array(59, 58, 60), PackedInt32Array(60, 58, 61), PackedInt32Array(64, 63, 62), PackedInt32Array(67, 66, 65), PackedInt32Array(71, 70, 68), PackedInt32Array(68, 70, 69), PackedInt32Array(74, 73, 72), PackedInt32Array(77, 76, 75), PackedInt32Array(78, 81, 79), PackedInt32Array(79, 81, 80), PackedInt32Array(83, 82, 84), PackedInt32Array(84, 82, 87), PackedInt32Array(84, 87, 86), PackedInt32Array(84, 86, 85), PackedInt32Array(89, 88, 90), PackedInt32Array(90, 88, 91), PackedInt32Array(94, 93, 92), PackedInt32Array(97, 96, 95), PackedInt32Array(100, 99, 98), PackedInt32Array(103, 102, 101), PackedInt32Array(106, 105, 107), PackedInt32Array(107, 105, 104), PackedInt32Array(109, 108, 110), PackedInt32Array(110, 108, 113), PackedInt32Array(110, 113, 112), PackedInt32Array(110, 112, 111), PackedInt32Array(115, 114, 116), PackedInt32Array(116, 114, 117), PackedInt32Array(119, 118, 120), PackedInt32Array(120, 118, 121), PackedInt32Array(125, 124, 122), PackedInt32Array(122, 124, 123)]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4s5ee"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2rhy7"]
+size = Vector3(100, 0.5, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1iim8"]
+size = Vector3(20, 0.5, 20)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ajsq6"]
+margin = 0.0
+radius = 0.595
+height = 2.44588
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_aohiy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ti245"]
+height = 0.4
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 2.5608, 0)
+shadow_enabled = true
+
+[node name="Node3D" type="Node3D" parent="." node_paths=PackedStringArray("Player")]
+transform = Transform3D(0.729852, 0, -0.683605, 0, 1, 0, 0.683605, 0, 0.729852, 0, 0, 0)
+script = ExtResource("1_gddu2")
+Player = NodePath("../Player")
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(-1, 5.96046e-08, -5.96046e-08, 0, 0.707107, 0.707107, 8.9407e-08, 0.707107, -0.707107, 0, 10, -12.301)
+current = true
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0672913, -0.100213, -0.0130415)
+navigation_mesh = SubResource("NavigationMesh_mo8qt")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D" groups=["Ground"]]
+collision_layer = 17
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D" groups=["Ground"]]
+transform = Transform3D(100, 0, 0, 0, 0.5, 0, 0, 0, 100, 0, 0, 0)
+material_override = ExtResource("2_tisg6")
+cast_shadow = 0
+mesh = SubResource("BoxMesh_4s5ee")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D" groups=["Ground"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.72529e-08, 0, 0)
+shape = SubResource("BoxShape3D_2rhy7")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.42525, -0.157702, 0, 0.157702, 0.42525, 0, 0, 0, 0.45355, 9.49056, 1.42844, 0)
+collision_layer = 17
+collision_mask = 16
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D2" groups=["Ground"]]
+transform = Transform3D(20, 0, 0, 0, 0.5, 0, 0, 0, 20, 0, 0, 0)
+material_override = ExtResource("2_tisg6")
+mesh = SubResource("BoxMesh_4s5ee")
+skeleton = NodePath("../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2" groups=["Ground"]]
+shape = SubResource("BoxShape3D_1iim8")
+
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("Camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.28507, 0)
+script = ExtResource("1_1mjs5")
+SPEED = 300.0
+RotateSpeed = 10
+Camera = NodePath("../Node3D/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245337, 0)
+shape = SubResource("CapsuleShape3D_ajsq6")
+
+[node name="PlayerModel" parent="Player" instance=ExtResource("2_v6cvg")]
+transform = Transform3D(-1.94079e-08, 0, -0.444, 0, 0.444, 0, 0.444, 0, -1.94079e-08, 0, -0.152238, 0)
+
+[node name="whistle" type="Area3D" parent="." node_paths=PackedStringArray("Cam", "Player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.18447, 0.646984, 0)
+collision_mask = 2
+script = ExtResource("6_c7lm2")
+Cam = NodePath("../Node3D/Camera3D")
+Player = NodePath("../Player")
+
+[node name="Whistle" type="MeshInstance3D" parent="whistle"]
+layers = 16
+material_override = ExtResource("5_e05ww")
+mesh = SubResource("CylinderMesh_aohiy")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="whistle"]
+shape = SubResource("CylinderShape3D_ti245")
+
+[node name="onion" parent="." instance=ExtResource("7_37cjr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 7, 11)
+
+[node name="Cone2" parent="onion" instance=ExtResource("9_fl856")]
+transform = Transform3D(2, 0, 0, 0, 1.3, 0, 0, 0, 2, 0, -6, 0)
+
+[node name="MinMin" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin2" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin3" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin4" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.608148, 1.4953, 6.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin5" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin6" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin7" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.608148, 1.4953, 8.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin8" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 8)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin9" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 8)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin10" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.608148, 1.4953, 10.4096)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin11" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 10)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin12" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 10)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin13" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.608148, 1.4953, 12.4096)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin14" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 12)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin15" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, 12)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin16" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60815, 1.4953, 4.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin17" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin18" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin19" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60815, 1.4953, 6.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin20" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin21" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin22" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60815, 1.4953, 8.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin23" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 8)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin24" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 8)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin25" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60815, 1.4953, 10.4096)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin26" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 10)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin27" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 10)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin28" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.60815, 1.4953, 12.4096)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin29" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 12)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin30" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 12)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin31" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6081, 1.4953, 4.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin32" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin33" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin34" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6081, 1.4953, 6.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin35" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin36" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin37" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6081, 1.4953, 8.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin38" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 8)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin39" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 8)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin40" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6081, 1.4953, 10.4096)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin41" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 10)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin42" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 10)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin43" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.6081, 1.4953, 12.4096)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin44" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 2, 12)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin45" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 2, 12)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin46" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6081, 1.4953, 4.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin47" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin48" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 2, 4)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin49" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.6081, 1.4953, 6.40961)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="MinMin50" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("4_gmt0d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 2, 6)
+Player = NodePath("../Player")
+Enabled = null
+CurGoPos = null
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.084, 0, 0, 0, 0.084, 0, 0, 0, 0.084, -2, 2, 0)
+modulate = Color(0.917647, 0, 0.117647, 0.866667)
+billboard = 1
+texture = ExtResource("10_un88e")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sprite3D"]
+stream = ExtResource("11_0ke3a")
+
+[connection signal="body_entered" from="whistle" to="whistle" method="_on_body_entered"]
